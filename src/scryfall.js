@@ -14,7 +14,7 @@ const sleep = function(ms) {
 const getPlanesData = async function() {
   const URL = "https://api.scryfall.com/cards/search?order=name&q=type%3Aplane+(game%3Apaper)";
 
-  await sleep(100);
+  await sleep(300);
   const res = await fetch(URL);
   if (res.status === 200) {
     const setData = await res.json();

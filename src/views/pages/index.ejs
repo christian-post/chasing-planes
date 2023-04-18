@@ -2,35 +2,33 @@
 <html lang="en">
 <head>
   <%- include('../partials/head'); %>
+
+  <% 
+    var randIndex = Math.floor(Math.random() * locals.cards.length);
+  %>
+
 </head>
 <body>
-
-<header>
-  <%- include('../partials/header'); %>
-</header>
 
 <main>
   <div class="container">
     <h1>
-      Very Important!
+      <%- locals.cards[randIndex].name %>
     </h1>
   </div>
-  <div class="container">
-    <p>
-      Lorem ipsom dolor sed amet.
-    </p>
+  <div class="image-container">
+    <img
+      class="plane-image"
+      src=<%- locals.cards[randIndex]?.image_uris?.large %> 
+      alt=<%- locals.cards[randIndex].name %>
+      >
   </div>
-  <div class="container">
-    <img src="images/butterfly.jpg" alt="A cute butterfly">
-  </div>
-  <div class="container">
-    <img src="images/tree.jpg" alt="A row of houseplants">
+  <div class="buttons-panel">
+    <button>Roll Planar Die</button>
+    <button>Draw a Card</button>
+    <button>Shuffle Deck</button>
   </div>
 </main>
-
-<footer>
-  <%- include('../partials/footer'); %>
-</footer>
 
 </body>
 </html>

@@ -77,19 +77,26 @@ select {
 
 /* MY STUFF */
 
-nav {
-  background-color: rgb(78, 212, 195);
-  padding: 0.5rem;
+.plane-image {
+  transform: rotate(90deg);
+  left: -100px;
+  max-height: 100dvh;
 }
 
-nav ul {
+.image-container {
   display: flex;
-  width: 80%;
-  justify-content: space-between;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+  margin-top: -100px;
+  margin-bottom: -100px;
+}
+
+.buttons-panel {
+  margin: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
 }
 
 .container {

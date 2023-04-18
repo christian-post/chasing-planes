@@ -2,6 +2,8 @@ const express = require('express');
 require("dotenv").config();
 const path = require('path');
 
+const { getPlanesData } = require('./scryfall');
+
 const app = express()
   // .use('/static', express.static(path.join(__dirname, '../public')))
   .use(express.static('public'))
@@ -11,8 +13,14 @@ const app = express()
 
 
 // GET requests
-app.get('/', (req, res) => {
-  res.render('pages/index');
+app.get('/', async function(req, res) {
+  const cards = await getPlanesData();
+
+  const params = {
+    cards: cards
+  };
+
+  res.render('pages/index', params);
 });
 
 
