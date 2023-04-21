@@ -112,6 +112,10 @@ select {
   min-width: 40dvw;
 }
 
+.hor {
+  flex-direction: row;
+}
+
 #oracle-text {
   width: 80dvw;
   font-size: larger;
@@ -119,39 +123,13 @@ select {
   margin: 0.25rem;
 }
 
-@media screen and (max-width: 500px) {
-  .buttons-panel {
-    flex-direction: column;
-    margin: auto;
-  }
-
-  .plane-image-large {
-    transform: rotate(0deg);
-    left: 0px;
-    height: auto;
-  }
-
-  .image-container {
-    margin-top: 0px;
-    margin-bottom: 0px;
-
-    margin: 0.5rem;
-  }
-
-  #oracle-text {
-    width: 100dvw;
-    font-size: large;
-  }
-}
-
-
-
 .container {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
+
 
 .footer {
   background-color: rgb(78, 212, 195);
@@ -189,5 +167,61 @@ select {
   margin-bottom: -220px;
 }
 
+
+#roll-die-button {
+  background-color: darkblue;
+  color: coral;
+  border: none;
+  border-radius: 1rem;
+  padding: 0.5rem;
+}
+
+#roll-die-button:active {
+  transform: translateY(4px);
+}
+
+
+
+
+@media screen and (max-width: 500px) {
+
+  .container {
+    flex-direction: column;
+  }
+
+  .buttons-panel {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 0 0.5rem 0;
+    font-size: medium;
+  }
+
+  .hor {
+    flex-direction: row;
+  }
+
+  .plane-image-large {
+    transform: rotate(0deg);
+    left: 0px;
+    height: 70dvh;
+  }
+
+  .image-container {
+    margin-top: 0px;
+    margin-bottom: 0px;
+
+    margin: 0.5rem;
+  }
+
+  #oracle-text {
+    width: 100dvw;
+    font-size: large;
+  }
+
+  #plane-name {
+    display: none;
+  }
+}
 
 

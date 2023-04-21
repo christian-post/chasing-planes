@@ -17,6 +17,36 @@
       return new Promise(resolve => setTimeout(resolve, ms));
     }
 
+
+    var drawCard = async function() {
+      await sleep(500);
+
+      planes.push(planes.shift());
+
+      img = document.querySelector('#planar-image');
+      img.src = planes[0].image_uris?.large;
+
+      document.querySelector('#plane-name').textContent = planes[0].name;
+    }
+
+
+    var undoDraw = async function() {
+
+      if (!confirm('Undo Last Draw?')) {
+        return;
+      }
+
+      await sleep(500);
+
+      planes.unshift(planes.pop());
+
+      img = document.querySelector('#planar-image');
+      img.src = planes[0].image_uris?.large;
+
+      document.querySelector('#plane-name').textContent = planes[0].name;
+    }
+
+
     var rollPlanarDie = async function() {
 
       let resultP = document.querySelector('#planar-die-result');
@@ -52,6 +82,8 @@
 
           oracleText.textContent = text;
 
+          document.querySelector('#plane-name').textContent = planes[0].name;
+
           break;
         case 2:
           console.log('chaos')
@@ -82,7 +114,7 @@
 
 <main>
   <div class="container">
-    <h1>
+    <h1 id="plane-name">
       <%- locals.planes[0].name %>
     </h1>
   </div>
@@ -94,10 +126,15 @@
       >
   </div>
   <div class="container">
+    <div class="buttons-panel | hor">
+      <button onclick="drawCard()">Draw Card</button>
+      <button onclick="undoDraw()">Undo Draw</button>
+    </div>
     <div class="buttons-panel">
-      <button onclick="rollPlanarDie()">Roll Planar Die</button>
+      <button id="roll-die-button" onclick="rollPlanarDie()">Roll Planar Die</button>
       <p id="planar-die-result"></p>
     </div>
+    
   </div>
   <div class="container">
     <p id="oracle-text"></p>
