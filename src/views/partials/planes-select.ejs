@@ -1,0 +1,60 @@
+<h3>
+  Planes
+</h3>
+<div class="horizontal-container">
+  <p>
+    Number selected:
+  </p>
+  <p id="planes-number-selected">
+    0
+  </p>
+</div>
+
+
+<div class="planes-container">
+  <% locals.planes.forEach(function(plane) { %>
+    <img 
+      src=<%- plane?.image_uris?.large %> 
+      alt=<%- plane?.name %>
+      data-selected="false"
+      data-id=<%- plane?.id %>
+      data-scryfall=<%- plane?.uri %>
+    >
+  <% }); %>
+</div>
+<h3>
+  Phenomena
+</h3>
+<div class="phenomena-container">
+  <% locals.phenomena.forEach(function(phenomena) { %>
+    <img 
+      src=<%- phenomena?.image_uris?.large %> 
+      alt=<%- phenomena?.name %>
+      data-selected="false"
+      data-id=<%- phenomena?.id %>
+      data-scryfall=<%- phenomena?.uri %>
+    >
+  <% }); %>
+</div>
+
+
+<script>
+  let images = document.querySelectorAll('img');
+  Array.from(images).forEach(image => {
+    image.onclick = function(event) {
+
+      let num = document.querySelector('#planes-number-selected');
+
+      if (event.target.dataset.selected === 'false') {
+        event.target.style.boxShadow = '0 0 0 5px red'; 
+        event.target.setAttribute('data-selected', 'true');
+        // refresh number of selected items
+        num.textContent = parseInt(num.textContent) + 1;
+      } else {
+        event.target.style.boxShadow = 'none'; 
+        event.target.setAttribute('data-selected', 'false');
+        num.textContent = parseInt(num.textContent) - 1;
+      }
+    }
+  });
+</script>

@@ -77,10 +77,18 @@ select {
 
 /* MY STUFF */
 
-.plane-image {
+
+.horizontal-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  padding: 0.5rem;
+}
+
+.plane-image-large {
+  height: 100dvh;
   transform: rotate(90deg);
   left: -100px;
-  max-height: 100dvh;
 }
 
 .image-container {
@@ -97,6 +105,11 @@ select {
   display: flex;
   justify-content: center;
   gap: 2rem;
+  font-size: x-large;
+}
+
+.buttons-panel p {
+  min-width: 400px;
 }
 
 .container {
@@ -115,3 +128,36 @@ select {
 .footer p {
   text-align: center;
 }
+
+
+.planes-container,
+.phenomena-container {
+  display: flex;
+  flex-direction: row;
+  gap: 140px;
+  flex-wrap: wrap;
+  padding-left: 80px;
+}
+
+.planes-container {
+  margin-bottom: 200px;
+}
+
+.phenomena-container {
+  margin-bottom: 200px;
+}
+
+.planes-container img,
+.phenomena-container img {
+  transform: rotate(90deg);
+  height: 400px;
+  position: relative;
+  margin-bottom: -220px;
+}
+
+#oracle-text {
+  width: 80dvw;
+  font-size: larger;
+  text-align: justify;
+}
+

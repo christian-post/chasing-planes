@@ -26,7 +26,23 @@ const getPlanesData = async function() {
 }
 
 
+const getPhenomenaData = async function() {
+  const URL = "https://api.scryfall.com/cards/search?q=type%3Aphenomenon+(game%3Apaper)";
+
+  await sleep(300);
+  const res = await fetch(URL);
+  if (res.status === 200) {
+    const setData = await res.json();
+    return setData.data;
+  } else {
+    console.log(`The cards could not be accessed. Error code ${res.status}.`);
+    return null;
+  }
+}
+
+
 module.exports = {
   sleep: sleep,
-  getPlanesData: getPlanesData
+  getPlanesData: getPlanesData,
+  getPhenomenaData: getPhenomenaData
 };

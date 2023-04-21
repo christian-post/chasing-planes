@@ -2,7 +2,7 @@ const express = require('express');
 require("dotenv").config();
 const path = require('path');
 
-const { getPlanesData } = require('./scryfall');
+const { getPlanesData, getPhenomenaData } = require('./scryfall');
 
 const app = express()
   // .use('/static', express.static(path.join(__dirname, '../public')))
@@ -14,14 +14,54 @@ const app = express()
 
 // GET requests
 app.get('/', async function(req, res) {
-  const cards = await getPlanesData();
+  const planes = await getPlanesData();
+  const phenomena = await getPhenomenaData();
 
   const params = {
-    cards: cards
+    planes: planes,
+    phenomena: phenomena
   };
 
   res.render('pages/index', params);
 });
+
+
+function shuffle(a) {
+  for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+
+app.get('/planes', async function(req, res) {
+  const planes = await getPlanesData();
+  const phenomena = await getPhenomenaData();
+
+  shuffle(planes)
+  
+  res.render('pages/planes', {
+    planes: planes.slice(0, 40),
+    phenomena: phenomena
+  });
+});
+
+
+app.post('/planes', async function(req, res) {
+  const planes = await getPlanesData();
+  const phenomena = await getPhenomenaData();
+
+  console.log(req.body)
+  
+  res.render('pages/planes', {
+    planes: planes,
+    phenomena: phenomena
+  });
+});
+
+
+
 
 
 // server loop

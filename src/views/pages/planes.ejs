@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head'); %>
+
+
+  <% var planes = locals.planes %>
+
+
+  <script>
+
+    var planes = <%- JSON.stringify(planes) %>;
+    console.log(planes)
+    localStorage.setItem('deck', JSON.stringify(planes));
+
+    const sleep = function(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    var rollPlanarDie = async function() {
+
+      let resultP = document.querySelector('#planar-die-result');
+      let oracleText = document.querySelector('#oracle-text');
+      resultP.textContent = '';
+      resultP.style.color = 'black';
+
+      oracleText.textContent = '';
+
+      // Waiting animation
+      for (let i=0; i < 10; i++) {
+        resultP.textContent += '..';
+        await sleep(100);
+      }
+
+      let text;
+      
+      // Roll planar die
+      let randNum = Math.floor(Math.random() * 6) + 1;
+      switch(randNum) {
+        case 1:
+          console.log('planeswalk');
+          // push top card to bottom
+          planes.push(planes.shift());
+
+          resultP.textContent = `You planeswalked to ${planes[0].name}.`;
+          resultP.style.color = 'blue';
+
+          img = document.querySelector('#planar-image');
+          img.src = planes[0].image_uris?.large;
+
+          text = planes[0].oracle_text.split('\nWhenever')[0];
+
+          oracleText.textContent = text;
+
+          break;
+        case 2:
+          console.log('chaos')
+          resultP.textContent = 'CHAOS!';
+
+          resultP.style.color = 'red';
+
+          // display chaos ability
+          text = planes[0].oracle_text.split('{CHAOS}, ')[1];
+
+          if (text === undefined) {
+            text = planes[0].oracle_text.split('ensues, ')[1];
+          }
+
+          oracleText.textContent = text[0].toUpperCase() + text.slice(1);
+          break;
+        default: 
+          console.log('nothing')
+
+          resultP.textContent = 'Nothing happens.';
+      }
+
+    }
+  </script>
+
+</head>
+<body>
+
+<main>
+  <div class="container">
+    <h1>
+      <%- locals.planes[0].name %>
+    </h1>
+  </div>
+  <div class="image-container">
+    <img
+      class="plane-image-large"
+      id="planar-image"
+      src=<%- locals.planes[0]?.image_uris?.large %> 
+      >
+  </div>
+  <div class="container">
+    <div class="buttons-panel">
+      <button onclick="rollPlanarDie()">Roll Planar Die</button>
+      <p id="planar-die-result"></p>
+    </div>
+  </div>
+  <div class="container">
+    <p id="oracle-text"></p>
+  </div>
+</main>
+
+</body>
+</html>
