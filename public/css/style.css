@@ -109,8 +109,42 @@ select {
 }
 
 .buttons-panel p {
-  min-width: 400px;
+  min-width: 40dvw;
 }
+
+#oracle-text {
+  width: 80dvw;
+  font-size: larger;
+  text-align: center;
+  margin: 0.25rem;
+}
+
+@media screen and (max-width: 500px) {
+  .buttons-panel {
+    flex-direction: column;
+    margin: auto;
+  }
+
+  .plane-image-large {
+    transform: rotate(0deg);
+    left: 0px;
+    height: auto;
+  }
+
+  .image-container {
+    margin-top: 0px;
+    margin-bottom: 0px;
+
+    margin: 0.5rem;
+  }
+
+  #oracle-text {
+    width: 100dvw;
+    font-size: large;
+  }
+}
+
+
 
 .container {
   display: flex;
@@ -155,9 +189,5 @@ select {
   margin-bottom: -220px;
 }
 
-#oracle-text {
-  width: 80dvw;
-  font-size: larger;
-  text-align: justify;
-}
+
 
